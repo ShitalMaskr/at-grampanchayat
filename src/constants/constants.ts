@@ -1,6 +1,5 @@
-const RELIFE_COLLECT_TABLE = 'RelifeCollect';
+const GRAMPANCHAYAT_COLLECT_TABLE:any = 'at-grampanchat-dev';
 
 export {
-    RELIFE_COLLECT_TABLE
-
+   GRAMPANCHAYAT_COLLECT_TABLE
 }

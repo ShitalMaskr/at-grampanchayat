@@ -7,7 +7,7 @@ export const Role = new Entity({
 
     // Define attributes
     attributes: {
-        PK: { partitionKey: true, },
+    PK: { partitionKey: true, },
         SK: { sortKey: true, },
         RoleName: { type: 'string' },
         RoleDescription: { type: 'string' }, 

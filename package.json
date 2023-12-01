@@ -24,7 +24,7 @@
     "@middy/http-urlencode-path-parser": "^4.5.5",
     "@typedorm/common": "^1.15.4",
     "@typedorm/core": "^1.15.4",
-    "dynamodb-toolbox": "^0.9.2",
+    "dynamodb-toolbox": "^0.8.5",
     "moment": "^2.29.4",
     "reflect-metadata": "^0.1.13"
   },

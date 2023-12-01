@@ -1,7 +1,7 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { Table } from 'dynamodb-toolbox';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb'
-import { RELIFE_COLLECT_TABLE } from '@constants/constants';
+import { GRAMPANCHAYAT_COLLECT_TABLE } from '@constants/constants';
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -24,7 +24,7 @@ const translateConfig = { marshallOptions, unmarshallOptions }
 export const DocumentClient = DynamoDBDocumentClient.from(new DynamoDBClient({}), translateConfig)
 // Instantiate a table
 export const RelifeCollect = new Table({
-    name: RELIFE_COLLECT_TABLE,
+    name: GRAMPANCHAYAT_COLLECT_TABLE,
     partitionKey: 'PK',
     sortKey: 'SK',
     DocumentClient,

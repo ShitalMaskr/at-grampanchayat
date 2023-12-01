@@ -1,13 +1,13 @@
 import { handlerPath } from '@libs/handler-resolver';
 
-export const createUser = {
-    addUser: {
-        handler: `${handlerPath(__dirname)}/handler.createUser`,
+export const organization = {
+    addOrganization: {
+        handler: `${handlerPath(__dirname)}/handler.createOrganization`,
         events: [
             {
                 http: {
                     method: 'post',
-                    path: 'user',
+                    path: 'addOrganization',
                     cors: true,
                     authorizer: 'aws_iam'
                 },
