@@ -1,0 +1,24 @@
+# version: 0.2
+# phases:
+#   install:
+#     commands:
+#       - npm cache clean -f
+#       - n 18.16.0
+#       - node --version
+#       - npm install
+#       - npm install -g serverless@3.32.2
+#       - npm install -g yarn
+#       - sls -v
+#       - npx sls -v
+#   post_build:
+#     commands:
+#       - export STAGE=$(aws ssm get-parameter --name STAGE --query "Parameter.Value" --region eu-west-1 --with-decryption --output text)
+#       - echo $STAGE
+#       - sls package --package output --stage ${STAGE}
+#       - sls deploy --stage ${STAGE}
+# artifacts:
+#   type: zip
+#   files:
+#     - "**/*.json"
+#   base-directory: output
+#   discard-paths: yes
