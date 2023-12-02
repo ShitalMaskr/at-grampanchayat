@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript';
 import permissions from 'serverless/permissions';
 import { organization } from '@functions/organization';
+import { login } from '@functions/login';
 
 const serverlessConfiguration: AWS = {
     useDotenv: true,
@@ -77,6 +78,7 @@ const serverlessConfiguration: AWS = {
     },
     // import the function via paths
     functions: {
+        ...login,
         ...organization,
         // ...profile,
         // ...crons,
