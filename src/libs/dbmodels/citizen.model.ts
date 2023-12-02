@@ -1,5 +1,5 @@
 import { Entity } from "dynamodb-toolbox";
-import { RelifeCollect } from ".";
+import { TableCollect } from ".";
 
 export const Citizen = new Entity({
     // Specify entity name
@@ -11,14 +11,14 @@ export const Citizen = new Entity({
         SK: { sortKey: true, },
         Name: { type: 'string' },
         Locality: { type: 'string' },
-        Contact: { type: 'num' },
+        Contact: { type: 'number' },
         Address: { type: 'map' },
         CreatedAt: { type: 'number', default: () => new Date().getTime() },
         ModifiedAt: { type: 'number', default: () => new Date().getTime(), onUpdate: true }
     },
     timestamps: false,
     // Assign it to our table
-    table: RelifeCollect
+    table: TableCollect
 
     // In Typescript, the "as const" statement is needed for type inference
 } as const);

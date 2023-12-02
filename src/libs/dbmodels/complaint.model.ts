@@ -1,5 +1,5 @@
 import { Entity } from "dynamodb-toolbox";
-import { RelifeCollect } from ".";
+import { TableCollect } from ".";
 
 export const Complaint = new Entity({
     // Specify entity name
@@ -18,7 +18,7 @@ export const Complaint = new Entity({
     },
     timestamps: false,
     // Assign it to our table
-    table: RelifeCollect
+    table: TableCollect
 
     // In Typescript, the "as const" statement is needed for type inference
 } as const);
