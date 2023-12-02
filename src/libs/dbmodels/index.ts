@@ -23,7 +23,7 @@ const translateConfig = { marshallOptions, unmarshallOptions }
 // Instantiate a DocumentClient
 export const DocumentClient = DynamoDBDocumentClient.from(new DynamoDBClient({}), translateConfig)
 // Instantiate a table
-export const RelifeCollect = new Table({
+export const TableCollect = new Table({
     name: GRAMPANCHAYAT_COLLECT_TABLE,
     partitionKey: 'PK',
     sortKey: 'SK',

@@ -8,15 +8,15 @@ import { Customer } from '@libs/dbmodels/organization.model';
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         //@ts-ignore
-        const obj: OrgCreate = event.body;
+        // const obj: OrgCreate = event.body;
 
-        obj.PK = obj.Domain;
-        obj.SK = "Organization";
-        console.log(obj, "objs")
+        // obj.PK = obj?.Domain;
+        // obj.SK = "Organization";
+        // console.log(obj, "objs")
         // Create an item (using table attribute names or aliases)
         const customer = {
             PK: "123",
-            SK:"Organization",
+            SK: "Organization",
             age: 35,
             name: 'Jane Smith',
             emailVerified: true,
@@ -24,9 +24,11 @@ const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<
             // status: 'active',
             // date_added: '2020-04-24'
         }
+        console.log(customer, 'customer');
 
         // Use the 'put' method of Customer:
-        await Customer.put(customer)
+        await Customer.put(customer).catch(err=>console.log(err,'======================')
+        )
         // const userDetails = await createOrganizationDetails(obj);
         // console.log(userDetails,"userDetails")
         // if (!userDetails) {
