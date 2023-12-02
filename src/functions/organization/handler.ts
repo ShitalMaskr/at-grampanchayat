@@ -15,8 +15,6 @@ const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<
 
         obj.PK = obj.Domain;
         obj.SK = Organization_Sk;
-        console.log({ PK: obj.PK, SK: obj.SK }, '{ PK: obj.PK, SK: obj.SK }');
-
         const org = await getOrganization({ PK: obj.PK, SK: obj.SK });
         if (!org.Item) {
             await createUser({
