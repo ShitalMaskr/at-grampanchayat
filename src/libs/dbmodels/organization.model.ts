@@ -8,6 +8,7 @@ export const Organization = new Entity({
         SK: { sortKey: true, },
         Name: { type: 'string' },
         Domain: { type: 'string' },
+        Email: { type: 'string' },
         CreatedAt: { type: 'number', default: () => new Date().getTime() },
         ModifiedAt: { type: 'number', default: () => new Date().getTime(), onUpdate: true }
     },

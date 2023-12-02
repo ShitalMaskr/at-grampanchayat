@@ -1,8 +1,22 @@
 
-import { OrgCreate } from "./interface";
+import { User } from "@libs/dbmodels/user.model";
+import { GetItem, OrgCreate, UserCreate } from "./interface";
 import { Organization } from "@libs/dbmodels/organization.model";
 
 
-export const createOrganizationDetails = async(obj: OrgCreate) => {
-        return await Organization.put(obj);
-    }
+export const createOrganizationDetails = async (obj: OrgCreate) => {
+    return await Organization.put(obj, {
+        strictSchemaCheck: true
+    });
+}
+
+
+export const getOrganization = async (params: GetItem) => {
+    return await Organization.get({ PK: params.PK, SK: params.SK })
+}
+
+export const createUser = async (obj: UserCreate) => {
+    return await User.put(obj, {
+        strictSchemaCheck: true
+    });
+}
