@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import permissions from 'serverless/permissions';
 import { organization } from '@functions/organization';
 import { login } from '@functions/login';
+import { excludePackage } from 'serverless/packages';
 
 const serverlessConfiguration: AWS = {
     useDotenv: true,
@@ -13,23 +14,7 @@ const serverlessConfiguration: AWS = {
             bundle: true,
             minify: false,
             sourcemap: true,
-            exclude: ['aws-sdk',
-                '@aws-sdk/client-dynamodb',
-                '@middy/core',
-                '@typedorm/common',
-                "node-fetch",
-                "@aws-sdk/client-secrets-manager",
-                "@aws-sdk/client-sns",
-                "@aws-sdk/client-sqs",
-                "@aws-sdk/client-ssm",
-                "@aws-sdk/lib-dynamodb",
-                "@middy/http-json-body-parser",
-                "@middy/http-urlencode-path-parser",
-                "@typedorm/core",
-                "dynamodb-toolbox",
-                "moment",
-                "reflect-metadata"
-            ],
+            exclude: excludePackage,
             target: 'node18',
             define: { 'require.resolve': undefined },
             platform: 'node',
