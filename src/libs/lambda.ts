@@ -1,6 +1,6 @@
 import { JWT_KEY } from "@constants/env";
 import middy from "@middy/core";
-import httpErrorHandler from "@middy/http-error-handler";
+// import httpErrorHandler from "@middy/http-error-handler";
 import middyJsonBodyParser from "@middy/http-json-body-parser";
 import httpUrlEncodePathParser from '@middy/http-urlencode-path-parser';
 import { APIGatewayProxyHandler } from "aws-lambda";
@@ -11,7 +11,6 @@ export const middyfy = (handler: APIGatewayProxyHandler) => {
   }).use(new TokenValidationMiddleware())
     .use(middyJsonBodyParser())
     .use(httpUrlEncodePathParser())
-    .use(httpErrorHandler())
 }
 
 export const middyfyAuth = (handler: APIGatewayProxyHandler) => {
