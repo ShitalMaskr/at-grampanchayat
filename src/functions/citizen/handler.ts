@@ -2,18 +2,15 @@ import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { CitizenCreate } from './interface';
-import { Citizen_Sk } from '@constants/constants';
+import { Organization_Sk } from '@constants/constants';
 import { createCitizenDetails } from './citizen.service';
 
 const createCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         // @ts-ignore
         const obj: CitizenCreate = event.body;
-        if (!obj.Domain) {
-            return response(400, { message: 'ERROR_DOMAIN_REQUIRED' });
-        }
         obj.PK = obj.Domain;
-        obj.SK = Citizen_Sk;
+        obj.SK = Organization_Sk;
         const citizen = await createCitizenDetails(obj);
         if (citizen.$metadata.httpStatusCode == 400) {
             console.error('error getting material =>', citizen);

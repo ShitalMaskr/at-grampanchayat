@@ -2,9 +2,7 @@ const GRAMPANCHAYAT_COLLECT_TABLE: any = `at-grampanchat-${process.env.STAGE}`;
 const SK_CREATED_AT_INDEX = "SK-CreatedAt-index";
 
 const Organization_Sk = "Organization";
-const Citizen_Sk = "Citizen";
 const Employee_Sk = "Employee";
-const New_Emp = "EmployeeID"
 
 const ADMIN_ROLE = 2;
 export {
@@ -13,6 +11,4 @@ export {
    Organization_Sk,
    SK_CREATED_AT_INDEX,
    Employee_Sk,
-   New_Emp,
-   Citizen_Sk
 }
