@@ -3,12 +3,18 @@ export interface OrgCreate {
     SK: string,
     Name: string,
     Domain: string,
-    Email: string
+    Email: string,
+    ContactNo: number,
+    State: string,
+    City: string,
+    PinCode: number,
+    VillageName: string,
+    isActive: string,
 }
 
 export interface GetItem {
     PK: string,
-    SK: string
+    SK: string,
 }
 
 

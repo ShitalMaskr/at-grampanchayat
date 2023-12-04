@@ -9,12 +9,13 @@ export const createOrganizationDetails = async (obj: OrgCreate) => {
         strictSchemaCheck: true
     });
 }
-
-
 export const getOrganization = async (params: GetItem) => {
     return await Organization.get({ PK: params.PK, SK: params.SK })
 }
 
+export const deleteOrganization = async (params: GetItem) => {
+    return await Organization.delete({ PK: params.PK, SK: params.SK })
+}
 export const createUser = async (obj: UserCreate) => {
     return await User.put(obj, {
         strictSchemaCheck: true
