@@ -58,9 +58,9 @@ const serverlessConfiguration: AWS = {
                 statements: permissions
             }
         },
-        // layers: [
-        //     'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:AtCrmLayer:${self:custom.LambdaLayerVersion}',
-        // ],
+        layers: [
+            'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:AtCrmLayer:${self:custom.LambdaLayerVersion}',
+        ],
     },
     // import the function via paths
     functions: {
