@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript';
 import permissions from 'serverless/permissions';
 import { organization } from '@functions/organization';
+import { employee } from '@functions/employee';
 import { login } from '@functions/login';
 import { excludePackage } from 'serverless/packages';
 
@@ -65,7 +66,7 @@ const serverlessConfiguration: AWS = {
     functions: {
         ...login,
         ...organization,
-        // ...profile,
+        ...employee,
         // ...crons,
         // ...device,
         // ...queues,
