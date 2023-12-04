@@ -7,16 +7,14 @@ import { ADMIN_ROLE, Organization_Sk } from '@constants/constants';
 
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
+        console.log(event.headers['user'], 'login User info');
         // @ts-ignore
         const obj: OrgCreate = event.body;
         if (!obj.Domain) {
             return response(400, { message: 'ERROR_DOMAIN_REQUIRED' });
         }
-
         obj.PK = obj.Domain;
         obj.SK = Organization_Sk;
-        console.log({ PK: obj.PK, SK: obj.SK }, '{ PK: obj.PK, SK: obj.SK }');
-
         const org = await getOrganization({ PK: obj.PK, SK: obj.SK });
         if (!org.Item) {
             await createUser({

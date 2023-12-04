@@ -1,0 +1,46 @@
+{
+    "name": "at-grampanchayat",
+    "version": "1.0.0",
+    "description": "This is app for client manager.",
+    "main": "serverless.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "local": "npx sls offline start --stage dev --reloadHandler",
+        "print": "sls print --stage dev",
+        "package": "sls package --package output --stage dev ",
+        "layer-build":"aws lambda publish-layer-version --layer-name GramSevaLayer --description 'serverless package lambda layer' --zip-file fileb://node_modules.zip --compatible-runtimes nodejs18.x nodejs16.x"
+    },
+    "engines": {
+        "node": "18.17.1"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.462.0",
+        "@aws-sdk/client-secrets-manager": "^3.462.0",
+        "@aws-sdk/client-sns": "^3.462.0",
+        "@aws-sdk/client-sqs": "^3.462.0",
+        "@aws-sdk/client-ssm": "^3.462.0",
+        "@aws-sdk/lib-dynamodb": "^3.462.0",
+        "@middy/core": "^3.4.0",
+        "@middy/http-error-handler": "^5.0.3",
+        "@middy/http-json-body-parser": "^3.4.0",
+        "@middy/http-urlencode-path-parser": "^4.5.5",
+        "@typedorm/common": "^1.15.4",
+        "@typedorm/core": "^1.15.4",
+        "crypto-js": "^4.2.0",
+        "dynamodb-toolbox": "^0.8.5",
+        "jsonwebtoken": "^9.0.2",
+        "moment": "^2.29.4",
+        "reflect-metadata": "^0.1.13"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [],
+    "author": "assimilate",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://assimilate.co.in/bugs"
+    },
+    "homepage": "https://assimilate.co.in"
+}

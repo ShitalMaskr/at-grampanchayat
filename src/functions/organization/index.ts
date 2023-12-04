@@ -9,7 +9,6 @@ export const organization = {
                     method: 'post',
                     path: 'addOrganization',
                     cors: true,
-                    authorizer: 'aws_iam'
                 },
             },
         ]

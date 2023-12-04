@@ -28,12 +28,7 @@ export const TableCollect = new Table({
     partitionKey: 'PK',
     sortKey: 'SK',
     DocumentClient,
-    // indexes: {
-    //     'SK-PK-Index': { partitionKey: 'SK', sortKey: 'PK' },
-    //     'ByDateIndex': { partitionKey: 'SK', sortKey: 'CreatedAt' },
-    //     'G-StatusIndex': { partitionKey: 'GStatus', sortKey: 'CreatedAt' },
-    //     'GSIDataIndex': { partitionKey: 'Data', sortKey: 'CreatedAt' },
-    //     'RecordTypeIndex': { partitionKey: 'RecordType', sortKey: 'CreatedAt' },
-    //     'ScheduledDateIndex': { partitionKey: 'RecordType', sortKey: 'ScheduledDate', }
-    // }
+    indexes: {
+        'SK-CreatedAt-index': { partitionKey: 'SK', sortKey: 'CreatedAt' }
+    }
 });
