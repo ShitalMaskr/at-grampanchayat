@@ -3,6 +3,7 @@ import permissions from 'serverless/permissions';
 import { organization } from '@functions/organization';
 import { employee } from '@functions/employee';
 import { login } from '@functions/login';
+import { citizen } from '@functions/citizen';
 import { excludePackage } from 'serverless/packages';
 
 const serverlessConfiguration: AWS = {
@@ -67,6 +68,7 @@ const serverlessConfiguration: AWS = {
         ...login,
         ...organization,
         ...employee,
+        ...citizen
         // ...crons,
         // ...device,
         // ...queues,

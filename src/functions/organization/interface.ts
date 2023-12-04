@@ -14,7 +14,7 @@ export interface OrgCreate {
 
 export interface GetItem {
     PK: string,
-    SK: string,
+    SK: string
 }
 
 

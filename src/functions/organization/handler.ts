@@ -2,7 +2,7 @@ import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { OrgCreate, GetItem } from './interface';
-import { createOrganizationDetails, createUser, deleteOrganization, getOrganization } from './organization.service';
+import { createOrganizationDetails, createUser, deleteOrganization, getOrganization, updateOrganizationDetails } from './organization.service';
 import { ADMIN_ROLE, Organization_Sk } from '@constants/constants';
 
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -72,7 +72,30 @@ const deleteOrganizationDetails = middyfy(async (event: APIGatewayProxyEvent): P
     }
 });
 
+
+const updateOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    try {
+        // @ts-ignore
+        const obj: OrgCreate = event.body;
+        if (!obj.Domain) {
+            return response(400, { message: 'ERROR_DOMAIN_REQUIRED' });
+        }
+        obj.PK = obj.Domain;
+        obj.SK = Organization_Sk;
+        const organization = await getOrganization({ PK: obj.PK, SK: obj.SK });
+        if (organization.Item) {
+            const updatedOrganization = await updateOrganizationDetails(obj);
+            return response(200, { message: 'Organization Updated Successfully', item: updatedOrganization });
+        } else {
+            return response(404, { message: 'ORGANIZATION_NOT_FOUND' });
+        }
+    } catch (error) {
+        console.log('error', error);
+        return response(500, error);
+    }
+});
+
 export {
     createOrganization,
-    getOrganizationDetails, deleteOrganizationDetails
+    getOrganizationDetails, deleteOrganizationDetails, updateOrganization
 }

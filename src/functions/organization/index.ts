@@ -37,4 +37,16 @@ export const organization = {
             },
         ]
     },
+    updateOrganization: {
+        handler: `${handlerPath(__dirname)}/handler.updateOrganization`,
+        events: [
+            {
+                http: {
+                    method: 'put',
+                    path: 'organization/updateOrganization',
+                    cors: true,
+                },
+            },
+        ]
+    },
 };

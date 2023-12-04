@@ -21,3 +21,10 @@ export const createUser = async (obj: UserCreate) => {
         strictSchemaCheck: true
     });
 }
+export const updateOrganizationDetails = async (obj: OrgCreate) => {
+    return await Organization.put(obj, {
+        strictSchemaCheck: true
+    });
+}
+
+
