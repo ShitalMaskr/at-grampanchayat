@@ -13,4 +13,28 @@ export const organization = {
             },
         ]
     },
+    getOrganization: {
+        handler: `${handlerPath(__dirname)}/handler.getOrganizationDetails`,
+        events: [
+            {
+                http: {
+                    method: 'get',
+                    path: 'getOrganization',
+                    cors: true,
+                },
+            },
+        ]
+    },
+    deleteOrganization: {
+        handler: `${handlerPath(__dirname)}/handler.deleteOrganizationDetails`,
+        events: [
+            {
+                http: {
+                    method: 'delete',
+                    path: 'deleteOrganization',
+                    cors: true,
+                },
+            },
+        ]
+    },
 };

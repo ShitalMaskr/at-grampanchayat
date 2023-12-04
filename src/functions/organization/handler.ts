@@ -1,8 +1,8 @@
 import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
-import { OrgCreate } from './interface';
-import { createOrganizationDetails, createUser, getOrganization } from './organization.service';
+import { OrgCreate, GetItem } from './interface';
+import { createOrganizationDetails, createUser, deleteOrganization, getOrganization } from './organization.service';
 import { ADMIN_ROLE, Organization_Sk } from '@constants/constants';
 
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -39,8 +39,40 @@ const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<
         return response(500, error);
     }
 })
+const getOrganizationDetails = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    try {
+        // @ts-ignore
+        const obj: GetItem = event.queryStringParameters;
+        const organizationResponse = await getOrganization({ PK: obj.PK, SK: obj.SK });
+        if (organizationResponse.Item) {
+            const organizationDetails = organizationResponse.Item;
+            return response(200, { message: 'SUCCESS', item: organizationDetails });
+        } else {
+            return response(404, { message: 'ORGANIZATION_DETAILS_NOT_FOUND' });
+        }
+    } catch (error) {
+        console.log('error', error);
+        return response(500, error);
+    }
+});
 
+const deleteOrganizationDetails = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    try {
+        // @ts-ignore
+        const obj: GetItem = event.queryStringParameters;
+        const organizationResponse = await deleteOrganization({ PK: obj.PK, SK: obj.SK });
+        if (organizationResponse.$metadata.httpStatusCode === 200) {
+            return response(200, { message: 'SUCCESS', item: null });
+        } else if (organizationResponse.$metadata.httpStatusCode === 404) {
+            return response(404, { message: 'ORGANIZATION_DETAILS_NOT_FOUND' });
+        }
+    } catch (error) {
+        console.log('error', error);
+        return response(500, error);
+    }
+});
 
 export {
-    createOrganization
+    createOrganization,
+    getOrganizationDetails, deleteOrganizationDetails
 }
