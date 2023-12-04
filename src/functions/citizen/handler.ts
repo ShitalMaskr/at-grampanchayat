@@ -2,7 +2,6 @@ import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { CitizenCreate } from './interface';
-import { Organization_Sk } from '@constants/constants';
 import { createCitizenDetails } from './citizen.service';
 
 const createCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -14,7 +13,7 @@ const createCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGa
         // @ts-ignore
         const obj: CitizenCreate = event.body;
         obj.PK = userInformation.userId;
-        obj.SK = Organization_Sk;
+        obj.SK = userInformation.SK;
 
         const citizen = await createCitizenDetails(obj);
 
