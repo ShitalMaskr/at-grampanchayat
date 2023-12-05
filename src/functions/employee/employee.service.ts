@@ -9,7 +9,6 @@ export const createEmployeeDetails = async (obj: EmpCreate) => {
     });
 }
 
-
 export const getEmployee = async (params: GetItem) => {
     return await Employee.get({ PK: params.PK, SK: params.SK })
 }

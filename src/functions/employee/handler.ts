@@ -18,9 +18,11 @@ const createEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
         console.log({ PK: obj.PK, SK: obj.SK }, '{ PK: obj.PK, SK: obj.SK }');
 
         const emp = await getEmployee({ PK: obj.PK, SK: obj.SK });
+        console.log(emp,'empemp')
+        console.log(emp,"vvvv")
         if (!emp.Item) {
-            await createEmployee({
-                PK: `Employee#${obj.PhoneNumber}`,
+            await createEmployeeDetails({
+                PK: `Employee#${obj.Email}`,
                 SK: `${Employee_Sk}#${obj.PK}`,
                 Email: obj.Email,
                 Name: obj.Name,
