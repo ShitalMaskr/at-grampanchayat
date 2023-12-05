@@ -21,11 +21,10 @@ const serverlessConfiguration: AWS = {
             target: 'node18',
             define: { 'require.resolve': undefined },
             platform: 'node',
-            concurrency: 10,
-            packagePath: ""
+            concurrency: 10
         },
         'serverless-offline': {
-            httpPort: 6600,
+            httpPort: 6000,
             lambdaPort: 6601,
             useChildProcesses: true
         },

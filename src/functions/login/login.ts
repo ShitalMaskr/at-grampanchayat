@@ -11,6 +11,8 @@ const signIn = middyfyAuth(async (event: APIGatewayProxyEvent): Promise<APIGatew
         console.log(event.headers, 'header');
         if (obj.userName && obj.password) {
             const { Item } = await getUserById({ PK: "User#" + obj.userName, SK: "Organization#" + event.headers.application });
+            console.log(Item, 'Item');
+
             if (Item) {
                 if (Item.Password !== obj.password) {
                     return response(400, { message: 'PASSWORD_INVALID' });
