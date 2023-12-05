@@ -34,6 +34,7 @@ const serverlessConfiguration: AWS = {
         region: '${env:REGION}',
         accountId: '${env:ACCOUNT_ID}',
         LambdaLayerVersion: '${env:LAMBDA_LAYER_VERSION}',
+        API_NAME: '${env:SERVICE_NAME}${env:STAGE}',
     },
     provider: {
         name: 'aws',
@@ -44,9 +45,10 @@ const serverlessConfiguration: AWS = {
         apiGateway: {
             minimumCompressionSize: 1024,
             shouldStartNameWithService: true,
-            restApiId: '${self:custom.restApiId}',
-            restApiRootResourceId: '${self:custom.restApiRootResourceId}',
+            // restApiId: '${self:custom.restApiId}',
+            // restApiRootResourceId: '${self:custom.restApiRootResourceId}',
         },
+        apiName: '${self:custom.API_NAME}',
         environment: {
             NODE_PATH: './:/opt/node_modules',
             REGION: '${self:custom.region}',
