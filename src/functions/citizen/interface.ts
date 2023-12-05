@@ -20,3 +20,16 @@ export interface GetItem {
     PK: string,
     SK: string
 }
+export interface CQuery {
+    model: any,
+    pk: string;
+    query: {
+        index: string,
+        reverse?: boolean
+        limit?: number,
+        startKey?: any;
+    }
+}
+export interface GetAllItems {
+    PK: string
+}
