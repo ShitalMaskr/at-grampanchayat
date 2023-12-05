@@ -3,13 +3,13 @@ export interface EmpCreate {
     SK: string,
     Name: string,
     Domain: string,
-    Email: string,  
-    PhoneNumber:number,
-    Address:Address
-    // DOB:Date,
-    // JoiningDate:Date,
-    Pan:string,
-    Aadhar:string,
+    Email: string,
+    PhoneNumber: number,
+    Address: Address
+    DOB: string,
+    JoiningDate: string,
+    Pan: string,
+    Aadhar: string,
 }
 export interface Address {
     AddressLine1: string;
