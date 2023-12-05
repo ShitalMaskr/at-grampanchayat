@@ -25,4 +25,16 @@ export const complaint = {
             },
         ]
     },
+    getAllComplaint: {
+        handler: `${handlerPath(__dirname)}/handler.getAll`,
+        events: [
+            {
+                http: {
+                    method: 'get',
+                    path: 'complaint/getAll',
+                    cors: true,
+                },
+            },
+        ]
+    },
 };

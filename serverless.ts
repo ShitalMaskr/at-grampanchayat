@@ -29,11 +29,10 @@ const serverlessConfiguration: AWS = {
             lambdaPort: 6601,
             useChildProcesses: true
         },
-        restApiId: '${env:REST_API_ID}',
-        restApiRootResourceId: '${env:REST_API_ROOT_RESOURCE_ID}',
         region: '${env:REGION}',
         accountId: '${env:ACCOUNT_ID}',
         LambdaLayerVersion: '${env:LAMBDA_LAYER_VERSION}',
+        API_NAME: '${env:SERVICE_NAME}${env:STAGE}',
     },
     provider: {
         name: 'aws',
@@ -44,24 +43,21 @@ const serverlessConfiguration: AWS = {
         apiGateway: {
             minimumCompressionSize: 1024,
             shouldStartNameWithService: true,
-            restApiId: '${self:custom.restApiId}',
-            restApiRootResourceId: '${self:custom.restApiRootResourceId}',
         },
+        apiName: '${self:custom.API_NAME}',
         environment: {
             NODE_PATH: './:/opt/node_modules',
             REGION: '${self:custom.region}',
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
             NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-            REST_API_ID: '${self:custom.restApiId}',
         },
-        // iamRoleStatements: permissions,
         iam: {
             role: {
                 statements: permissions
             }
         },
         layers: [
-            'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:AtCrmLayer:${self:custom.LambdaLayerVersion}',
+            'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:GramSevaLayer:${self:custom.LambdaLayerVersion}',
         ],
     },
     // import the function via paths
@@ -71,10 +67,6 @@ const serverlessConfiguration: AWS = {
         ...employee,
         ...citizen,
         ...complaint
-        // ...crons,
-        // ...device,
-        // ...queues,
-        // ...client
     },
     package: { individually: true }
 };

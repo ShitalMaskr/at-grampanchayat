@@ -1,6 +1,6 @@
 import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
-import {  middyfyAuth } from '@libs/lambda';
+import { middyfyAuth } from '@libs/lambda';
 import { getUserById } from './login.service';
 import jwt from 'jsonwebtoken';
 import { JWT_KEY } from '@constants/env';
@@ -10,7 +10,7 @@ const signIn = middyfyAuth(async (event: APIGatewayProxyEvent): Promise<APIGatew
         const obj: { userName: string, password: string } = event.body;
         console.log(event.headers, 'header');
         if (obj.userName && obj.password) {
-            const { Item } = await getUserById({ PK: "User#" + obj.userName, SK: "Organization#" + event.headers.host });
+            const { Item } = await getUserById({ PK: "User#" + obj.userName, SK: "Organization#" + event.headers.application });
             if (Item) {
                 if (Item.Password !== obj.password) {
                     return response(400, { message: 'PASSWORD_INVALID' });

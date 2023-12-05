@@ -3,7 +3,7 @@ import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy, middyfyAuth } from '@libs/lambda';
 import { ComplaintCreate } from './interface';
 import { COMPLAINT, COMPLAINT_SK } from '@constants/constants';
-import { createComplaintDetails, getComplaintDetails } from './complaint.service';
+import { createComplaintDetails, getAllComplaint, getComplaintDetails } from './complaint.service';
 
 const createComplaint = middyfyAuth(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
@@ -45,6 +45,23 @@ const getComplaint = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGat
         return response(500, error);
     }
 });
+const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    try {
+        const userInformation: any = event.headers["user"];
+        const PK = `${COMPLAINT}#${userInformation.SK}`;
+        const { pagination, limit }: any = event.queryStringParameters;
+        const complaintResponse = await getAllComplaint(pagination, limit, { PK });
+        if (complaintResponse.Items && complaintResponse.Items.length > 0) {
+            return response(200, { message: 'SUCCESS', items: complaintResponse.Items });
+        } else {
+            return response(404, { message: 'No Complaint Details Found' });
+        }
+    } catch (error) {
+        console.log('error', error);
+        return response(500, error);
+    }
+});
+
 export {
-    createComplaint, getComplaint
+    createComplaint, getComplaint, getAll
 }
