@@ -49,4 +49,16 @@ export const organization = {
             },
         ]
     },
+    getAllOrganization: {
+        handler: `${handlerPath(__dirname)}/handler.getAll`,
+        events: [
+            {
+                http: {
+                    method: 'get',
+                    path: 'organization/getAll',
+                    cors: true,
+                },
+            },
+        ]
+    },
 };

@@ -25,3 +25,16 @@ export interface UserCreate {
     Email: string,
     Password: string
 }
+export interface Orgquery {
+    model: any,
+    pk: string;
+    query: {
+        index: string,
+        reverse?: boolean
+        limit?: number,
+        startKey?: any;
+    }
+}
+export interface GetAllItems {
+    PK: string
+}
