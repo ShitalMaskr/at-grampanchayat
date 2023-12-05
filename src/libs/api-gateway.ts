@@ -26,11 +26,14 @@ export const pagination = (statusCode: number, response?: any) => {
     body: JSON.stringify(payload)
   }
 }
-
 export const paginationDecode = (pagination: string) => {
-  const startKey = pagination && Buffer.from(pagination, "base64") || ""
-  if (startKey) {
-    return JSON.parse(startKey.toString("utf8"));
+  console.log(pagination, "pagination");
+  if (pagination) {
+    const startKey = Buffer.from(pagination, "base64");
+    if (startKey.length > 0) {
+      return JSON.parse(startKey.toString("utf8"));
+    }
   }
-  return undefined
+
+  return undefined;
 };
