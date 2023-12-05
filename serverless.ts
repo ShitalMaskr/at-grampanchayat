@@ -61,7 +61,7 @@ const serverlessConfiguration: AWS = {
             }
         },
         layers: [
-            'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:AtCrmLayer:${self:custom.LambdaLayerVersion}',
+            'arn:aws:lambda:${self:custom.region}:${self:custom.accountId}:layer:GramSevaLayer:${self:custom.LambdaLayerVersion}',
         ],
     },
     // import the function via paths
