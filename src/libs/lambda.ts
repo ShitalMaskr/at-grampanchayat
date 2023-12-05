@@ -28,12 +28,9 @@ export class TokenValidationMiddleware implements middy.MiddlewareObj<any, any> 
   public async before(request: any): Promise<void> {
     try {
       const token = request?.event?.headers?.Authorization;
-      console.log(token,'token')
       const accessTokenSecret: jwt.Secret = String(JWT_KEY);
       console.log(accessTokenSecret,'accessTokenSecret')
       jwt.verify(token, accessTokenSecret, async (err: any, decoded: any) => {
-        console.log('err',err);
-        console.log('decoded',decoded)
         if (err) {
           request.response = {
             statusCode: 401,

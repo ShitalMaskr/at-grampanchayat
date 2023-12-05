@@ -5,7 +5,6 @@ const SK_CREATED_AT_INDEX = "SK-CreatedAt-index";
 const Organization_Sk = "Organization";
 const CITIZEN = "Citizen";
 const COMPLAINT = "Complaint";
-const ORGNIZATION = "Organization";
 const COMPLAINT_SK = "Organization#superadmin"
 const Employee_Sk = "Employee#";
 const EMPLOYEE = "Employee";
@@ -23,6 +22,5 @@ export {
    CITIZEN_SK,
    COMPLAINT_SK,
    COMPLAINT,
-   EMPLOYEE,
-   ORGNIZATION
+   EMPLOYEE
 }
