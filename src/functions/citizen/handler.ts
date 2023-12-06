@@ -1,7 +1,7 @@
 import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
-import { CitizenCreate, GetAllItems, GetItem } from './interface';
+import { CitizenCreate, GetItem } from './interface';
 import { createCitizenDetails, getAllCitizen, getCitizenDetails, updateCitizenDetails } from './citizen.service';
 import { CITIZEN } from '@constants/constants';
 
@@ -22,7 +22,7 @@ const createCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGa
             console.error('error getting material =>', citizen);
             return response(400, { message: 'ERROR_GETTING_MATERIAL_TYPES' });
         }
-        return response(200, { message: 'Citizen Added Successfully', item: citizen, PK: obj.PK, SK: obj.SK });
+        return response(200, { message: 'Citizen Added Successfully', item: citizen });
     } catch (error) {
         console.log('error', error);
         return response(500, error);
@@ -73,8 +73,8 @@ const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     try {
         const userInformation: any = event.headers["user"];
         const SK = userInformation.SK;
-        const { pagination, limit }: any = event.queryStringParameters;
-        const citizenResponse = await getAllCitizen(pagination, limit, SK);
+        const { pagination }: any = event.queryStringParameters;
+        const citizenResponse = await getAllCitizen(pagination, SK);
         if (citizenResponse.Items && citizenResponse.Items.length > 0) {
             return response(200, { message: 'SUCCESS', items: citizenResponse.Items });
         } else {

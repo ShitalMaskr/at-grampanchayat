@@ -1,6 +1,6 @@
 
 import { User } from "@libs/dbmodels/user.model";
-import { GetAllItems, GetItem, OrgCreate, Orgquery, UserCreate } from "./interface";
+import { GetItem, OrgCreate, Orgquery, UserCreate } from "./interface";
 import { Organization } from "@libs/dbmodels/organization.model";
 import { paginationDecode } from "@libs/api-gateway";
 import { SK_CREATED_AT_INDEX } from "@constants/constants";
@@ -29,14 +29,13 @@ export const updateOrganizationDetails = async (obj: OrgCreate) => {
         strictSchemaCheck: true
     });
 }
-export const getAllOrganization = async (pagination?: string, limit?: number, params?: GetAllItems) => {
+export const getAllOrganization = async (pagination?: string, params?: string) => {
     const startKey: any = paginationDecode(pagination);
     const query: Orgquery = {
         model: Organization,
-        pk: params.PK,
+        pk: params,
         query: {
             index: SK_CREATED_AT_INDEX,
-            limit: Number(limit) || 50,
             reverse: true,
             startKey: startKey
         }

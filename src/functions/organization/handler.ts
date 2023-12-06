@@ -30,7 +30,7 @@ const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<
                 console.error('error getting material =>', organization);
                 return response(400, { message: 'ERROR_GETTING_MATERIAL_TYPES' });
             }
-            return response(200, { message: 'SUCCESS', item: organization, PK: obj.PK, SK: obj.SK });
+            return response(200, { message: 'SUCCESS', item: organization });
         }
         return response(400, { message: 'DOMAIN_ALREADY_EXISTED' });
 
@@ -97,9 +97,9 @@ const updateOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<
 const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const userInformation: any = event.headers["user"];
-        const PK = `${userInformation.SK}`;
-        const { pagination, limit }: any = event.queryStringParameters;
-        const organizationResponse = await getAllOrganization(pagination, limit, { PK });
+        const PK: any = `${userInformation.SK}`;
+        const { pagination }: any = event.queryStringParameters;
+        const organizationResponse = await getAllOrganization(pagination, PK);
         if (organizationResponse.Items && organizationResponse.Items.length > 0) {
             return response(200, { message: 'SUCCESS', items: organizationResponse.Items });
         } else {
