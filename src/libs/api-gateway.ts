@@ -25,17 +25,19 @@ export const pagination = (statusCode: number, response?: any) => {
       .toString(), "utf8")
       .toString('base64') : undefined,
   };
+  console.log('payload api gateways', payload)
   return {
     statusCode,
     body: JSON.stringify(payload)
   }
 }
 export const paginationDecode = (pagination: string) => {
-  console.log(pagination, "pagination");
+  console.log( typeof pagination, " type of pagination");
   if (pagination) {
     const startKey = Buffer.from(pagination, "base64");
     if (startKey.length > 0) {
       return JSON.parse(startKey.toString("utf8"));
+      // return startKey;
     }
   }
 

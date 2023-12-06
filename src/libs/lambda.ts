@@ -27,8 +27,9 @@ export class TokenValidationMiddleware implements middy.MiddlewareObj<any, any> 
   }
   public async before(request: any): Promise<void> {
     try {
-      const token = request.event.headers.Authorization;
+      const token = request?.event?.headers?.Authorization;
       const accessTokenSecret: jwt.Secret = String(JWT_KEY);
+      console.log(accessTokenSecret,'accessTokenSecret')
       jwt.verify(token, accessTokenSecret, async (err: any, decoded: any) => {
         if (err) {
           request.response = {
@@ -42,7 +43,6 @@ export class TokenValidationMiddleware implements middy.MiddlewareObj<any, any> 
           request.event.headers["user"] = decoded;
         }
       });
-
     } catch (e) {
       request.response = {
         statusCode: 401,
