@@ -1,8 +1,8 @@
 
 import { paginationDecode } from "@libs/api-gateway";
-import { CQuery, CitizenCreate, GetAllItems, GetItem } from "./interface";
+import { CQuery, CitizenCreate, GetItem } from "./interface";
 import { Citizen } from "@libs/dbmodels/citizen.model";
-import { SK_CREATED_AT_INDEX } from "@constants/constants";
+import { CITIZEN, SK_CREATED_AT_INDEX } from "@constants/constants";
 
 export const getByIndex = async ({ model, pk, query }: CQuery) => {
     return await model.query(pk, query);
@@ -20,14 +20,13 @@ export const updateCitizenDetails = async (obj: CitizenCreate) => {
         strictSchemaCheck: true
     });
 }
-export const getAllCitizen = async (pagination?: string, limit?: number, params?: GetAllItems) => {
+export const getAllCitizen = async (pagination?: string, params?: string) => {
     const startKey: any = paginationDecode(pagination);
     const query: CQuery = {
         model: Citizen,
-        pk: params.PK,
+        pk: `${CITIZEN}#${params}`,
         query: {
             index: SK_CREATED_AT_INDEX,
-            limit: Number(limit) || 50,
             reverse: true,
             startKey: startKey
         }

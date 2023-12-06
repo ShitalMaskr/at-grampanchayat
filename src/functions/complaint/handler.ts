@@ -48,9 +48,9 @@ const getComplaint = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGat
 const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const userInformation: any = event.headers["user"];
-        const PK = `${COMPLAINT}#${userInformation.SK}`;
-        const { pagination, limit }: any = event.queryStringParameters;
-        const complaintResponse = await getAllComplaint(pagination, limit, { PK });
+        const SK = userInformation.SK;
+        const { pagination }: any = event.queryStringParameters;
+        const complaintResponse = await getAllComplaint(pagination, SK);
         if (complaintResponse.Items && complaintResponse.Items.length > 0) {
             return response(200, { message: 'SUCCESS', items: complaintResponse.Items });
         } else {

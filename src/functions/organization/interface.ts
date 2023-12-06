@@ -4,14 +4,18 @@ export interface OrgCreate {
     Name: string,
     Domain: string,
     Email: string,
-    ContactNo: number,
-    State: string,
-    City: string,
-    PinCode: number,
+    MobileNumber: number,
+    Address: Address,
     VillageName: string,
     isActive: string,
 }
-
+export interface Address {
+    AddressLine1: string;
+    AddressLine2: string;
+    State: string;
+    City: string;
+    PinCode: number;
+}
 export interface GetItem {
     PK: string,
     SK: string
@@ -31,10 +35,6 @@ export interface Orgquery {
     query: {
         index: string,
         reverse?: boolean
-        limit?: number,
         startKey?: any;
     }
-}
-export interface GetAllItems {
-    PK: string
 }

@@ -18,10 +18,6 @@ export interface CQuery {
     query: {
         index: string,
         reverse?: boolean
-        limit?: number,
         startKey?: any;
     }
-}
-export interface GetAllItems {
-    PK: string
 }

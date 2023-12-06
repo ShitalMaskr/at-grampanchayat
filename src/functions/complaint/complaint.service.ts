@@ -1,9 +1,9 @@
 
 import { Complaint } from "@libs/dbmodels/complaint.model";
-import { CQuery, ComplaintCreate, GetAllItems, GetItem } from "./interface";
+import { CQuery, ComplaintCreate, GetItem } from "./interface";
 import { Citizen } from "@libs/dbmodels/citizen.model";
 import { paginationDecode } from "@libs/api-gateway";
-import { SK_CREATED_AT_INDEX } from "@constants/constants";
+import { COMPLAINT, SK_CREATED_AT_INDEX } from "@constants/constants";
 import { getByIndex } from "@functions/citizen/citizen.service";
 
 export const createComplaintDetails = async (obj: ComplaintCreate) => {
@@ -14,14 +14,13 @@ export const createComplaintDetails = async (obj: ComplaintCreate) => {
 export const getComplaintDetails = async (params: GetItem) => {
     return await Citizen.get({ PK: params.PK, SK: params.SK })
 }
-export const getAllComplaint = async (pagination?: string, limit?: number, params?: GetAllItems) => {
+export const getAllComplaint = async (pagination?: string, params?: string) => {
     const startKey: any = paginationDecode(pagination);
     const query: CQuery = {
         model: Citizen,
-        pk: params.PK,
+        pk: `${COMPLAINT}#${params}`,
         query: {
             index: SK_CREATED_AT_INDEX,
-            limit: Number(limit) || 50,
             reverse: true,
             startKey: startKey
         }
