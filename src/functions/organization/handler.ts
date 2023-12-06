@@ -3,7 +3,7 @@ import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { OrgCreate, GetItem } from './interface';
 import { createOrganizationDetails, createUser, deleteOrganization, getAllOrganization, getOrganization, updateOrganizationDetails } from './organization.service';
-import { ADMIN_ROLE, ORGNIZATION, Organization_Sk } from '@constants/constants';
+import { ADMIN_ROLE, Organization_Sk } from '@constants/constants';
 
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
