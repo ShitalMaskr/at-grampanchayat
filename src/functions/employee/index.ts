@@ -7,7 +7,7 @@ export const employee = {
             {
                 http: {
                     method: 'post',
-                    path: 'addEmployee',
+                    path: 'employee/addEmployee',
                     cors: true,
                     authorizer: 'aws_iam'
                 },
@@ -21,7 +21,7 @@ export const employee = {
             {
                 http: {
                     method: 'put',
-                    path: 'updateEmployee',
+                    path: 'employee/updateEmployee',
                     cors: true,
                 },
             },
@@ -45,7 +45,7 @@ export const employee = {
             {
                 http: {
                     method: 'get',
-                    path: 'getAllEmployee',
+                    path: 'employee/getAllEmployee',
                     cors: true,
                 },
             },
