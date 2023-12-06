@@ -29,7 +29,7 @@ const createEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
         return response(500, error);
     }
 });
-const getemployeeDetail = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+const getEmployeeDetails = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         // @ts-ignore
         const obj: GetItem = event.queryStringParameters;
@@ -84,6 +84,6 @@ const getAllEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
     }
 });
 export {
-    createEmployee,getemployeeDetail,updateEmployee,getAllEmployee
+    createEmployee,getEmployeeDetails,updateEmployee,getAllEmployee
 
 }
