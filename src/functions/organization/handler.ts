@@ -3,7 +3,7 @@ import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { OrgCreate, GetItem } from './interface';
 import { createOrganizationDetails, createUser, deleteOrganization, getAllOrganization, getOrganization, updateOrganizationDetails } from './organization.service';
-import { ADMIN_ROLE, ORGNIZATION, Organization_Sk } from '@constants/constants';
+import { ADMIN_ROLE, Organization_Sk } from '@constants/constants';
 
 const createOrganization = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
@@ -98,6 +98,7 @@ const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     try {
         const userInformation: any = event.headers["user"];
         const PK = `${userInformation.SK}`;
+        console.log(PK,'PK')
         const { pagination, limit }: any = event.queryStringParameters;
         const organizationResponse = await getAllOrganization(pagination, limit, { PK });
         if (organizationResponse.Items && organizationResponse.Items.length > 0) {

@@ -28,7 +28,7 @@ export const employee = {
         ]
     },
     getEmployee: {
-        handler: `${handlerPath(__dirname)}/handler.getemployeeDetail`,
+        handler: `${handlerPath(__dirname)}/handler.getEmployeeDetail`,
         events: [
             {
                 http: {

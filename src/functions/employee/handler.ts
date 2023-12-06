@@ -3,6 +3,7 @@ import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { EmpCreate } from './interface';
 import { EMPLOYEE, Employee_Sk } from '@constants/constants';
+import { pagination } from '@libs/api-gateway';
 import { createEmployeeDetails, getAll, getEmployee, updateEmployeeDetails } from './employee.service';
 
 const createEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -70,14 +71,11 @@ const updateEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
 const getAllEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const empInformation: any = event.headers["user"];
-        const PK: any = `${EMPLOYEE}#${empInformation.SK}`;
-        const { pagination, }: any = event.queryStringParameters;
-        const employeeResponse = await getAll(pagination, undefined, { PK });
+        const PK: any = `${empInformation.SK}`;
+        // const { pagination }: any = event.queryStringParameters;
+        const employeeResponse = await getAll( PK, event.queryStringParameters?.pagination );
         if (employeeResponse.Items && employeeResponse.Items.length > 0) {
-            return pagination(200, {
-                Items: employeeResponse.Items,
-                LastEvaluatedKey: employeeResponse.LastEvaluatedKey,
-            })
+            return pagination(200, employeeResponse)         
         } else {
             return response(400, { message: 'No Employee Details Found' });
         }
