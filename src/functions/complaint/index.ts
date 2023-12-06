@@ -1,7 +1,7 @@
 import { handlerPath } from '@libs/handler-resolver';
 
 export const complaint = {
-    addCitizen: {
+    addComplaint: {
         handler: `${handlerPath(__dirname)}/handler.createComplaint`,
         events: [
             {

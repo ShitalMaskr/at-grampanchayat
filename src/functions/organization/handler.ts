@@ -98,7 +98,6 @@ const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     try {
         const userInformation: any = event.headers["user"];
         const PK = `${userInformation.SK}`;
-        console.log(PK,'PK')
         const { pagination, limit }: any = event.queryStringParameters;
         const organizationResponse = await getAllOrganization(pagination, limit, { PK });
         if (organizationResponse.Items && organizationResponse.Items.length > 0) {
