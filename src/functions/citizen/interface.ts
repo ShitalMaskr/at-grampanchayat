@@ -31,5 +31,5 @@ export interface CQuery {
     }
 }
 export interface GetAllItems {
-    PK: string
+    SK: string
 }

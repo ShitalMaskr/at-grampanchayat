@@ -22,7 +22,7 @@ const createComplaint = middyfyAuth(async (event: APIGatewayProxyEvent): Promise
             return response(400, { message: 'ERROR_GETTING_MATERIAL_TYPES' });
         }
 
-        return response(200, { message: 'Complaint Send Successfully', item: complaint });
+        return response(200, { message: 'Complaint Send Successfully', item: complaint, PK: obj.PK, SK: obj.SK });
     } catch (error) {
         console.log('error', error);
         return response(500, error);
@@ -48,9 +48,9 @@ const getComplaint = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGat
 const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const userInformation: any = event.headers["user"];
-        const PK = `${COMPLAINT}#${userInformation.SK}`;
+        const SK = userInformation.SK;
         const { pagination, limit }: any = event.queryStringParameters;
-        const complaintResponse = await getAllComplaint(pagination, limit, { PK });
+        const complaintResponse = await getAllComplaint(pagination, limit, SK);
         if (complaintResponse.Items && complaintResponse.Items.length > 0) {
             return response(200, { message: 'SUCCESS', items: complaintResponse.Items });
         } else {

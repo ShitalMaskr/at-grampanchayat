@@ -22,8 +22,7 @@ const createCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGa
             console.error('error getting material =>', citizen);
             return response(400, { message: 'ERROR_GETTING_MATERIAL_TYPES' });
         }
-
-        return response(200, { message: 'Citizen Added Successfully', item: citizen });
+        return response(200, { message: 'Citizen Added Successfully', item: citizen, PK: obj.PK, SK: obj.SK });
     } catch (error) {
         console.log('error', error);
         return response(500, error);
@@ -73,9 +72,9 @@ const updateCitizen = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGa
 const getAll = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const userInformation: any = event.headers["user"];
-        const PK = `${CITIZEN}#${userInformation.SK}`;
+        const SK = userInformation.SK;
         const { pagination, limit }: any = event.queryStringParameters;
-        const citizenResponse = await getAllCitizen(pagination, limit, { PK });
+        const citizenResponse = await getAllCitizen(pagination, limit, SK);
         if (citizenResponse.Items && citizenResponse.Items.length > 0) {
             return response(200, { message: 'SUCCESS', items: citizenResponse.Items });
         } else {

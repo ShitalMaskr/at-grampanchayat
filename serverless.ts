@@ -6,6 +6,7 @@ import { login } from '@functions/login';
 import { citizen } from '@functions/citizen';
 import { complaint } from '@functions/complaint';
 import { excludePackage } from 'serverless/packages';
+import { dashboard } from '@functions/Dashboard';
 
 const serverlessConfiguration: AWS = {
     useDotenv: true,
@@ -72,7 +73,8 @@ const serverlessConfiguration: AWS = {
         ...organization,
         ...employee,
         ...citizen,
-        ...complaint
+        ...complaint,
+        ...dashboard
         // ...crons,
         // ...device,
         // ...queues,
