@@ -2,7 +2,7 @@ import { response } from '@libs/api-gateway';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda"
 import { middyfy } from '@libs/lambda';
 import { EmpCreate } from './interface';
-import {  EMPLOYEE, Employee_Sk } from '@constants/constants';
+import { EMPLOYEE, Employee_Sk } from '@constants/constants';
 import { createEmployeeDetails, getAll, getEmployee, updateEmployeeDetails } from './employee.service';
 
 const createEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -38,7 +38,7 @@ const getEmployeeDetails = middyfy(async (event: APIGatewayProxyEvent): Promise<
             const employeeDetails = employeeResponse.Item;
             return response(200, { message: 'SUCCESS', item: employeeDetails });
         } else {
-            return response(404, { message: 'EMPLOYEE_DETAILS_NOT_FOUND' });
+            return response(400, { message: 'EMPLOYEE_DETAILS_NOT_FOUND' });
         }
     } catch (error) {
         console.log('error', error);
@@ -60,7 +60,7 @@ const updateEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
             const updatedEmployee = await updateEmployeeDetails(obj);
             return response(200, { message: 'Employee Updated Successfully', item: updatedEmployee });
         } else {
-            return response(404, { message: 'EMPLOYEE_NOT_FOUND' });
+            return response(400, { message: 'EMPLOYEE_NOT_FOUND' });
         }
     } catch (error) {
         console.log('error', error);
@@ -70,13 +70,16 @@ const updateEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
 const getAllEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         const empInformation: any = event.headers["user"];
-        const PK :any= `${EMPLOYEE}#${empInformation.SK}`;
-        const { pagination, limit }: any = event.queryStringParameters;
-        const employeeResponse = await getAll(pagination, limit, { PK });
+        const PK: any = `${EMPLOYEE}#${empInformation.SK}`;
+        const { pagination, }: any = event.queryStringParameters;
+        const employeeResponse = await getAll(pagination, undefined, { PK });
         if (employeeResponse.Items && employeeResponse.Items.length > 0) {
-            return response(200, { message: 'SUCCESS', items: employeeResponse.Items });
+            return pagination(200, {
+                Items: employeeResponse.Items,
+                LastEvaluatedKey: employeeResponse.LastEvaluatedKey,
+            })
         } else {
-            return response(404, { message: 'No Employee Details Found' });
+            return response(400, { message: 'No Employee Details Found' });
         }
     } catch (error) {
         console.log('error', error);
@@ -84,6 +87,6 @@ const getAllEmployee = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
     }
 });
 export {
-    createEmployee,getEmployeeDetails,updateEmployee,getAllEmployee
+    createEmployee, getEmployeeDetails, updateEmployee, getAllEmployee
 
 }

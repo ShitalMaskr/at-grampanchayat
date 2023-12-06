@@ -7,7 +7,7 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import jwt from 'jsonwebtoken';
 export const middyfy = (handler: APIGatewayProxyHandler) => {
   return middy(handler).before((request: any) => {
-    // console.log('request ========>', request.event);
+    console.log('request ========>', request.event);
   }).use(new TokenValidationMiddleware())
     .use(middyJsonBodyParser())
     .use(httpUrlEncodePathParser())
@@ -15,7 +15,7 @@ export const middyfy = (handler: APIGatewayProxyHandler) => {
 
 export const middyfyAuth = (handler: APIGatewayProxyHandler) => {
   return middy(handler).before((request: any) => {
-    // console.log('request ========>', request.event);
+    console.log('request ========>', request.event);
   })
     .use(middyJsonBodyParser())
     .use(httpUrlEncodePathParser())
