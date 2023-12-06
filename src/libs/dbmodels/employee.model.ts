@@ -13,6 +13,8 @@ export const Employee = new Entity({
         Address: { type: 'map' },
         AddressLine1: { type: 'string' },
         AddressLine2: { type: 'string' },
+        Area: { type: 'string' },
+        Locality: { type: 'string' },
         DOB: { type: 'string', default: () => new Date().getTime() },
         JoiningDate: { type: 'string', default: () => new Date().getTime() },
         Pan: { type: 'string' },

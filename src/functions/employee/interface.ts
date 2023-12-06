@@ -14,6 +14,7 @@ export interface EmpCreate {
 export interface Address {
     AddressLine1: string;
     AddressLine2: string;
+    Area:string,
     Locality: string;
     State: string;
     City: string;
