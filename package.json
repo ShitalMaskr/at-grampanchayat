@@ -5,7 +5,7 @@
   "main": "serverless.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "local": "npx sls offline start --stage dev --reloadHandler",
+    "local": "npx sls offline start --stage dev --reloadHandler -t",
     "print": "sls print --stage dev",
     "package": "sls package --package output --stage dev "
   },

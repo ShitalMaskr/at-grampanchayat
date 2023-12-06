@@ -3,6 +3,10 @@ class ControllerHelper {
     const data: responseInterface = await event.then((res: JSON) => {
       const response: responseInterface = {
         statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
         body: res,
       };
 
@@ -11,6 +15,10 @@ class ControllerHelper {
       .catch((err: JSON) => {
         const response: responseInterface = {
           statusCode: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+          },
           body: err,
         };
 
